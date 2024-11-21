@@ -37,6 +37,7 @@ get_arch:
 
 PHONY += scailx_install
 scailx_install: all
+	mkdir -p build
 	find src/ -name '*scailx*dtb'  -exec cp -f {} build/ \;
 	find src/ -name '*scailx*dtbo' -exec cp -f {} build/ \;
 	find src/ -name '*scailx*dtb'  -exec cp -f {} /boot/bsp0/devicetree/ \;
