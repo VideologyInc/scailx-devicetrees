@@ -1,0 +1,62 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+/*
+ * Copyright (C) 2023 VideologyInc
+ *
+ */
+
+#include "imx8mp-pinfunc.h"
+
+/dts-v1/;
+/plugin/;
+
+&{/chosen} {
+	overlays {
+		dsi-adv7533 = __TIMESTAMP__;
+	};
+};
+
+&{/} {
+	reg_adv_hdmi: dummyreg_adv_hdmi {
+		regulator-name = "dummyreg_adv_hdmi";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <5500000>;
+		regulator-boot-on;
+		regulator-always-on;
+	};
+};
+
+&lcdif1 {
+    status = "okay";
+};
+
+&dsi0_i2c {
+    #address-cells = <1>;
+	#size-cells = <0>;
+
+	adv_bridge: adv7533@3d {
+		compatible = "adi,adv7533";
+		reg = <0x3d>;
+		adi,addr-cec = <0x3c>;
+		adi,dsi-lanes = <4>;
+		status = "okay";
+
+		port {
+			adv7535_in: endpoint {
+				remote-endpoint = <&dsi_out>;
+			};
+		};
+	};
+};
+
+&mipi_dsi {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	port@1 {
+		dsi_out: endpoint {
+			remote-endpoint = <&adv7535_in>;
+			attach-bridge;
+		};
+	};
+};

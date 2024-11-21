@@ -1,0 +1,33 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+/*
+ * Copyright (C) 2023 VideologyInc
+ *
+ */
+// SPI1 overlay to use SPI bus, which is on GPIO-B interface
+
+/dts-v1/;
+/plugin/;
+
+&{/chosen} {
+	overlays {
+		gpio_a_spi = __TIMESTAMP__;
+	};
+};
+
+&{/} {
+    aliases {
+		gpio-a-spi = &spidev_a;
+	};
+};
+
+&gpio_a_spi {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+	spidev_a: spi@0 {
+		reg = <0>;
+		compatible = "rohm,dh2228fv";
+		spi-max-frequency = <30000000>;
+	};
+};
+

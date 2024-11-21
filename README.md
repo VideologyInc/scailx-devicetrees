@@ -1,2 +1,7 @@
-# scailx-devicetrees
-devicetree files and overlays for scailx ai platform
+# Linux Devicetree files and overlays for Scailx platform
+
+to build devicetree files:
+
+```
+make all
+```
