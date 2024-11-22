@@ -1,0 +1,98 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+/*
+ * Copyright (C) 2024 VideologyInc
+ *
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "imx8mp-pinfunc.h"
+#include <dt-bindings/clock/imx8mp-clock.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+
+&{/chosen} {
+	overlays {
+		cam1-sony-mipi = __TIMESTAMP__;
+	};
+};
+
+&{/} {
+	clk_14745k: clk_14745k {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <14745600>;
+	};
+
+	sony_mipi_sensor: sensor {
+		compatible = "raspberrypi,dummy-csi2-sensor";
+		status = "okay";
+
+		port {
+			mipi_1_ep: endpoint {
+				data-lanes = <1 2 3 4>;
+				clock-lanes = <0>;
+				max-pixel-frequency = /bits/ 64 <266000000>;
+				remote-endpoint = <&mipi_csi1_ep>;
+			};
+		};
+	};
+};
+
+&csi1_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	sony_mipi_serial: sc16is740@57 {
+		compatible = "nxp,sc16is750", "nxp,sc16is740";
+		reg = <57>;
+		clocks = <&clk_14745k>;
+		interrupt-parent = <&gpio5>;
+		interrupts = <21 IRQ_TYPE_LEVEL_LOW>;
+		pinctrl-0 = <&sony_mipi_serialt_int_grp>;
+		pinctrl-names = "default";
+		// gpio-controller;
+		// #gpio-cells = <2>;
+	};
+};
+
+&mipi_csi_1 {
+	status = "okay";
+	clock-frequency = <266000000>;
+	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_266M>;
+	assigned-clock-rates = <266000000>;
+	#address-cells = <1>;
+	#size-cells = <0>;
+	port@1 {
+		reg = <1>;
+		mipi_csi1_ep: endpoint {
+			remote-endpoint = <&mipi_1_ep>;
+			data-lanes = <4>;
+			csis-hs-settle = <16>;
+		};
+	};
+};
+
+&cameradev {
+	status = "okay";
+};
+
+&isi_1 {
+	status = "disabled";
+};
+
+&isp_1 {
+	status = "okay";
+};
+
+&dewarp {
+	status = "okay";
+};
+
+&iomuxc {
+	sony_mipi_serialt_int_grp: sony_mipi_serialt_int {
+		fsl,pins = <
+			/* Flash pin of CAM-B port */
+			MX8MP_IOMUXC_I2C4_SDA__GPIO5_IO21		0x22
+		>;
+	};
+};
