@@ -18,36 +18,35 @@
 };
 
 &{/} {
-	clk_14745k_1: clk_14745k {
+	clk_14745k_0: clk_14745k {
 		compatible = "fixed-clock";
 		#clock-cells = <0>;
 		clock-frequency = <14745600>;
 	};
 
-	sony_mipi_sensor_1: sensor {
+	sony_mipi_sensor_0: sensor {
 		compatible = "raspberrypi,dummy-csi2-sensor";
 		status = "okay";
 
 		port {
-			mipi_1_ep: endpoint {
+			mipi_0_ep: endpoint {
+				remote-endpoint = <&mipi_csi0_ep>;
 				data-lanes = <1 2 3 4>;
 				clock-lanes = <0>;
-				max-pixel-frequency = /bits/ 64 <266000000>;
-				remote-endpoint = <&mipi_csi1_ep>;
 			};
 		};
 	};
 };
 
-&csi1_i2c {
+&csi0_i2c {
 	#address-cells = <1>;
 	#size-cells = <0>;
-	sony_mipi_serial_1: sc16is740@57 {
+	sony_mipi_serial_0: sc16is740@57 {
 		compatible = "nxp,sc16is750", "nxp,sc16is740";
 		reg = <57>;
 		clocks = <&clk_14745k>;
 		interrupt-parent = <&gpio5>;
-		interrupts = <21 IRQ_TYPE_LEVEL_LOW>;
+		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
 		pinctrl-0 = <&sony_mipi_serialt_int_grp>;
 		pinctrl-names = "default";
 		// gpio-controller;
@@ -55,16 +54,17 @@
 	};
 };
 
-&mipi_csi_1 {
+
+&mipi_csi_0 {
 	#address-cells = <1>;
 	#size-cells = <0>;
 	clock-frequency = <500000000>;
 	status = "okay";
 
-	port@1 {
-		reg = <1>;
-		mipi_csi1_ep: endpoint {
-			remote-endpoint = <&mipi_1_ep>;
+	port@0 {
+		reg = <0>;
+		mipi_csi0_ep: endpoint {
+			remote-endpoint = <&mipi_0_ep>;
 			data-lanes = <4>;
 			csis-hs-settle = <13>;
 			csis-clk-settle = <2>;
@@ -74,14 +74,14 @@
 };
 
 &cameradev {
-	status = "okay";
+status = "okay";
 };
 
 &iomuxc {
 	sony_mipi_serialt_int_grp: sony_mipi_serialt_int {
 		fsl,pins = <
 			/* Flash pin of CAM-B port */
-			MX8MP_IOMUXC_I2C4_SDA__GPIO5_IO21		0x22
+			MX8MP_IOMUXC_GPIO1_IO08__GPIO1_IO08		0x22
 		>;
 	};
 };
