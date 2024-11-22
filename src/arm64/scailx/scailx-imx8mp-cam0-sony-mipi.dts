@@ -44,7 +44,7 @@
 	sony_mipi_serial_0: sc16is740@57 {
 		compatible = "nxp,sc16is750", "nxp,sc16is740";
 		reg = <57>;
-		clocks = <&clk_14745k>;
+		clocks = <&clk_14745k_0>;
 		interrupt-parent = <&gpio5>;
 		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
 		pinctrl-0 = <&sony_mipi_serialt_int_grp>;
