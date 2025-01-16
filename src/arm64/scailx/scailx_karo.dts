@@ -301,6 +301,73 @@ gpio_b_usb_phy: &usb3_phy0{};
 };
 
 
+&gpio1 {
+    pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_gpio1_user>;
+	gpio-line-names = "",
+           			  "CSI1-TRIGGER",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "CSI0-TRIGGER",
+           			  "",
+           			  "CSI0-FLASH",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "DISP-BL_DSI",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "";
+};
+
+&gpio4 {
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_gpio4_user>;
+	gpio-line-names = "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "STATUS-LED",
+           			  "EXPANDER-INT",
+           			  "GPIOB-GP1",
+           			  "GPIOA-GP1",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "";
+};
+
 // imx8m PIN MUX REGISTERS:
 //   |---|---|---|---| # |---|---|---|---| # |---|---|---|SION| # |---|MUX|MUX|MUX|
 //     IOMUXC_MUX_SION_ENABLED     0x40000000  // enable software read of pin state irrespective of mux function.
@@ -322,6 +389,22 @@ gpio_b_usb_phy: &usb3_phy0{};
 //     IOMUXC_PAD_DSE_X6           0x00000006  (Strongest)
 
 &iomuxc {
+	pinctrl_gpio1_user: gpio1usergrp {
+		fsl,pins = <
+            MX8MP_IOMUXC_GPIO1_IO01__GPIO1_IO01 0x16
+            MX8MP_IOMUXC_GPIO1_IO06__GPIO1_IO06 0x16
+            MX8MP_IOMUXC_GPIO1_IO08__GPIO1_IO08 0x16
+            /* MX8MP_IOMUXC_GPIO1_IO15__GPIO1_IO15 0x16 */
+		>;
+	};
+
+	pinctrl_gpio4_user: gpio4usergrp {
+		fsl,pins = <
+            MX8MP_IOMUXC_SAI2_TXC__GPIO4_IO25   0x16
+            MX8MP_IOMUXC_SAI2_TXD0__GPIO4_IO26  0x16
+		>;
+	};
+
 	pinctrl_etnphy_int_b: etnphy-int-bgrp {
 		fsl,pins = <
 			    MX8MP_IOMUXC_SAI2_RXFS__GPIO4_IO21		0x90
