@@ -2,3 +2,4 @@
 *.dtb*
 *.vscode*
 build/
+src/arm64/freescale/

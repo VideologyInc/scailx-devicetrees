@@ -368,6 +368,43 @@ gpio_b_usb_phy: &usb3_phy0{};
            			  "";
 };
 
+&gpio5 {
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_gpio5_user>;
+	gpio-line-names = "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "CSI0-FLASH",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "",
+           			  "";
+};
+
 // imx8m PIN MUX REGISTERS:
 //   |---|---|---|---| # |---|---|---|---| # |---|---|---|SION| # |---|MUX|MUX|MUX|
 //     IOMUXC_MUX_SION_ENABLED     0x40000000  // enable software read of pin state irrespective of mux function.
@@ -402,6 +439,12 @@ gpio_b_usb_phy: &usb3_phy0{};
 		fsl,pins = <
             MX8MP_IOMUXC_SAI2_TXC__GPIO4_IO25   0x16
             MX8MP_IOMUXC_SAI2_TXD0__GPIO4_IO26  0x16
+		>;
+	};
+
+	pinctrl_gpio5_user: gpio5usergrp {
+		fsl,pins = <
+            MX8MP_IOMUXC_I2C4_SDA__GPIO5_IO21		0x150
 		>;
 	};
 

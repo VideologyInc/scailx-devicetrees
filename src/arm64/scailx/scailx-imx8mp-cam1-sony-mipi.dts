@@ -18,7 +18,7 @@
 };
 
 &{/} {
-	clk_14745k_1: clk_14745k {
+    clk_14745k_1: clk_14745k {
 		compatible = "fixed-clock";
 		#clock-cells = <0>;
 		clock-frequency = <14745600>;
@@ -42,14 +42,12 @@
 &csi1_i2c {
 	#address-cells = <1>;
 	#size-cells = <0>;
-	sony_mipi_serial_1: sc16is740@57 {
+	sony_mipi_serial_1: sc16is740@0x57 {
 		compatible = "nxp,sc16is750", "nxp,sc16is740";
-		reg = <57>;
+		reg = <0x57>;
 		clocks = <&clk_14745k_1>;
 		interrupt-parent = <&gpio5>;
 		interrupts = <21 IRQ_TYPE_LEVEL_LOW>;
-		pinctrl-0 = <&sony_mipi_serialt_int_grp>;
-		pinctrl-names = "default";
 		// gpio-controller;
 		// #gpio-cells = <2>;
 	};
@@ -75,12 +73,4 @@
 
 &cameradev {
 	status = "okay";
-};
-
-&iomuxc {
-	sony_mipi_serialt_int_grp: sony_mipi_serialt_int {
-		fsl,pins = <
-			MX8MP_IOMUXC_I2C4_SDA__GPIO5_IO21   0x16
-		>;
-	};
 };

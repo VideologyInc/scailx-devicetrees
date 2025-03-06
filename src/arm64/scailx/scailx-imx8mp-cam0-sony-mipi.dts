@@ -41,14 +41,12 @@
 &csi0_i2c {
 	#address-cells = <1>;
 	#size-cells = <0>;
-	sony_mipi_serial_0: sc16is740@57 {
+	sony_mipi_serial_0: sc16is740@0x57 {
 		compatible = "nxp,sc16is750", "nxp,sc16is740";
-		reg = <57>;
+		reg = <0x57>;
 		clocks = <&clk_14745k_0>;
 		interrupt-parent = <&gpio1>;
 		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
-		pinctrl-0 = <&sony_mipi_serialt_int_grp>;
-		pinctrl-names = "default";
 		// gpio-controller;
 		// #gpio-cells = <2>;
 	};
@@ -75,12 +73,4 @@
 
 &cameradev {
 status = "okay";
-};
-
-&iomuxc {
-	sony_mipi_serialt_int_grp: sony_mipi_serialt_int {
-		fsl,pins = <
-			MX8MP_IOMUXC_GPIO1_IO08__GPIO1_IO08		0x22
-		>;
-	};
 };
