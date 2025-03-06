@@ -45,7 +45,7 @@
 		compatible = "nxp,sc16is750", "nxp,sc16is740";
 		reg = <57>;
 		clocks = <&clk_14745k_0>;
-		interrupt-parent = <&gpio5>;
+		interrupt-parent = <&gpio1>;
 		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
 		pinctrl-0 = <&sony_mipi_serialt_int_grp>;
 		pinctrl-names = "default";
@@ -80,7 +80,6 @@ status = "okay";
 &iomuxc {
 	sony_mipi_serialt_int_grp: sony_mipi_serialt_int {
 		fsl,pins = <
-			/* Flash pin of CAM-B port */
 			MX8MP_IOMUXC_GPIO1_IO08__GPIO1_IO08		0x22
 		>;
 	};
