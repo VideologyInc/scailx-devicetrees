@@ -25,7 +25,7 @@
 	};
 
 	sony_mipi_sensor_1: sensor {
-		compatible = "raspberrypi,dummy-csi2-sensor";
+		compatible = "scailx,dummy-csi2-sensor";
 		status = "okay";
 
 		port {
