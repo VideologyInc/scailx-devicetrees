@@ -41,8 +41,8 @@
 &csi0_i2c {
 	#address-cells = <1>;
 	#size-cells = <0>;
-	sony_mipi_serial_0: sc16is740@0x57 {
-		compatible = "nxp,sc16is750", "nxp,sc16is740";
+	sony_mipi_serial_0: sc16is741@0x57 {
+		compatible = "nxp,sc16is741";
 		reg = <0x57>;
 		clocks = <&clk_14745k_0>;
 		interrupt-parent = <&gpio1>;
