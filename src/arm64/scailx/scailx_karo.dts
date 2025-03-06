@@ -392,7 +392,7 @@ gpio_b_usb_phy: &usb3_phy0{};
            			  "",
            			  "",
            			  "",
-           			  "CSI0-FLASH",
+           			  "CSI1-FLASH",
            			  "",
            			  "",
            			  "",
