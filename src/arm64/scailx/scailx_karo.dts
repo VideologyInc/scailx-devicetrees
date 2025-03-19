@@ -94,6 +94,10 @@ gpio_b_usb: &usb3_0{};
 gpio_b_usb_dwc: &usb_dwc3_0{};
 gpio_b_usb_phy: &usb3_phy0{};
 
+&gpio_b_usb_dwc {
+	dr_mode = "host";
+};
+
 &mix_gpu_ml {
 	/delete-property/ memory-region;
  };
