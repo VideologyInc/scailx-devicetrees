@@ -13,7 +13,7 @@
 
 &{/chosen} {
 	overlays {
-		cam1-sony-mipi = __TIMESTAMP__;
+		cam0-sony-mipi = __TIMESTAMP__;
 	};
 };
 
