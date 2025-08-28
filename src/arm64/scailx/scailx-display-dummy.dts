@@ -1,0 +1,72 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+/*
+ * Copyright (C) 2023 VideologyInc
+ *
+ * Scailx does not map LVDS pins out, but this is useful as it enables the GPU
+ *
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/clock/imx8mp-clock.h>
+#include <dt-bindings/gpio/gpio.h>
+
+&{/chosen} {
+	overlays {
+		lvds-dummy = __TIMESTAMP__;
+	};
+};
+
+&{/} {
+	panel_lvds: panel-lvds {
+        compatible = "innolux,g101ice-l01";
+
+        data-mapping = "jeida-24";
+
+       	port {
+      		panel_lvds_in: endpoint {
+     			remote-endpoint = <&ldb_ch0_out>;
+      		};
+       	};
+    };
+};
+
+&ldb {
+	status = "okay";
+
+	lvds-channel@0 {
+	    #address-cells = <1>;
+	    #size-cells = <0>;
+	    fsl,data-mapping = "spwg";
+		fsl,data-width = <24>;
+		status = "okay";
+
+		port@1 {
+		    reg = <1>;
+			ldb_ch0_out: endpoint {
+				remote-endpoint = <&panel_lvds_in>;
+			};
+		};
+	};
+};
+
+&gpu_2d {
+	status = "okay";
+};
+
+&gpu_3d {
+	status = "okay";
+};
+
+&lcdif2 {
+	status = "okay";
+};
+
+&ldb_phy {
+	status = "okay";
+};
+
+&mix_gpu_ml {
+	status = "okay";
+};
